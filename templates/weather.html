@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width , initial-scale = 1.0">
+        <title>weather app</title>
+        <style>
+            body{
+                font-family: Arial, sans-serif; 
+                display: flex; 
+                flex-direction: column;
+                align-items: center; 
+                justify-content: center; 
+                height:100vh;
+                width: 100vw;
+                
+            }
+            .container{
+                background-color: antiquewhite; 
+                color: black;
+                display: flex; 
+                flex-direction: column;
+                align-items: center; 
+                justify-content: center; 
+                height: 100vh;
+                width: 100vw;
+                
+                
+            } 
+            .input-field{
+                border:3px solid black ;
+                border-radius: 5px;
+                height: 30px;
+                width: 350px;
+            }
+
+            button{
+                background-color: green;
+                color: white;
+                
+                border-radius: 5px;
+                height: 35px;
+                width: 100px;
+
+            }
+            button:hover{
+                background-color: rgb(1, 195, 1);
+            }
+
+            h2{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+
+            }
+
+        </style>
+    </head>
+</html>
+<body>
+    <div class="container">
+        <div class="city-name">  
+            <h2>Weather application</h2>
+            <form method="POST" action="/get_weather">
+                <input class="input-field" name="city" type="text" placeholder="enter city...">
+                <button type="submit">search</button>
+            </form>
+            {% if weather and weather.cod == 200 %}
+                <p><strong>City:</strong> {{ weather.name }}</p>
+                <p><strong>Min Temp:</strong> {{ weather.main.temp_min }}°C</p>
+                <p><strong>Max Temp:</strong> {{ weather.main.temp_max }}°C</p>
+                <p><strong>Weather:</strong> {{ weather.weather[0].description }}</p>
+                <img src="https://openweathermap.org/img/wn/{{weather.weather[0].icon}}@2x.png">
+            {% elif weather %}
+                <p style="color:red;">Error: {{ weather.message }}</p>
+            {% endif %}
+            
+        </div>
+    </div>
+</body>
