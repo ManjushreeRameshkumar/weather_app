@@ -44,6 +44,7 @@ def get_weather_forecast():
         forecast_time = datetime.fromtimestamp(forecast["dt"])
         if forecast_time.date() == forecast_date.date():
             filtered_forecast.append(forecast)
+            
 
     return jsonify({
         "city": data.get("city", {}).get("name"),
