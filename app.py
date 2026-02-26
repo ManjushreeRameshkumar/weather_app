@@ -2,7 +2,6 @@ from flask import Flask, request ,redirect,render_template, jsonify
 import requests
 from datetime import datetime
 
-
 app=Flask(__name__)
 
 API_KEY = "680208fc2a1486cc54ab99795d231c27"
@@ -43,8 +42,7 @@ def get_weather_forecast():
     for forecast in data.get("list", []):
         forecast_time = datetime.fromtimestamp(forecast["dt"])
         if forecast_time.date() == forecast_date.date():
-            filtered_forecast.append(forecast)
-            
+            filtered_forecast.append(forecast)        
 
     return jsonify({
         "city": data.get("city", {}).get("name"),
